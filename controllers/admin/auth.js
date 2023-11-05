@@ -53,11 +53,11 @@ exports.signin = (req, res) => {
             { _id: user._id, role: user.role },
             process.env.JWT_SECRET
           );
-          const { _id, name, roll, email } = user;
+          const { _id, name, roll, email, role } = user;
           res.cookie("token", token);
           res.status(200).json({
             token,
-            user: { _id, name,roll, email },
+            user: { _id, name,roll, email,role },
             success:true
           });
         } else {

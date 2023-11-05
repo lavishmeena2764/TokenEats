@@ -2,6 +2,7 @@ const express       =require('express'),
       bodyParser    = require('body-parser'),
       mongoose      = require('mongoose'),   
       cors          =require('cors')
+      var Web3 = require('web3');
 
 const adminRoutes = require('./routes/user')
 const vendorRoutes = require('./routes/vendor')
@@ -28,6 +29,15 @@ app.get("/", (req, res) => {
 
 app.use("/admin",adminRoutes);
 app.use("/vendor",vendorRoutes);
+
+let account;
+const connectMetamask = async()=>{
+    if(window.ethereum !== "undefined"){
+        const accounts = await ethereum.request({method:"eth_requestAccounts"});
+        account = accounts[0];
+        document.getElementById("accountArea").innerHTML = account;
+    }
+}
 
 const port = process.env.PORT || 5000;
 
